@@ -142,7 +142,7 @@ export default async function CheckoutPage({
           {plan === "part_topic" && (
             <div className="mt-5">
               <p className="text-sm font-medium">Choose a topic</p>
-              <div className="mt-2 grid max-h-80 gap-1.5 overflow-y-auto pr-1 sm:grid-cols-2">
+              <div className="mt-2 grid max-h-80 grid-cols-1 gap-1.5 overflow-y-auto pr-1 sm:grid-cols-2">
                 {ELL1000_TOPICS.map((t, i) => {
                   const owned = access.partAll || access.topics.has(t.id);
                   return (

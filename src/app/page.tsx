@@ -29,7 +29,7 @@ export default async function LandingPage() {
     <div className="min-h-dvh bg-surface">
       {/* Header */}
       <header className="sticky top-0 z-30 border-b bg-surface/90 backdrop-blur">
-        <div className="mx-auto flex h-16 max-w-7xl items-center gap-8 px-4 sm:px-6">
+        <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:gap-8 sm:px-6">
           <Brand showTagline />
           <nav className="hidden items-center gap-6 text-sm text-muted-foreground md:flex">
             <a href="#features" className="hover:text-foreground">Features</a>
@@ -66,16 +66,16 @@ export default async function LandingPage() {
             backgroundSize: "48px 48px",
           }}
         />
-        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[1.1fr_1fr] lg:py-24">
+        <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-12 sm:px-6 sm:py-20 lg:grid-cols-[1.1fr_1fr] lg:gap-12 lg:py-24">
           <div>
             <p className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-medium text-nav-muted">
               <span className="h-1.5 w-1.5 rounded-full bg-accent" /> Online test series · Enhanced Learning
             </p>
-            <h1 className="mt-5 text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl">
+            <h1 className="mt-5 text-[32px] font-semibold leading-[1.12] tracking-tight sm:text-5xl">
               Exam-grade prep tests,
-              <br />
+              {" "}<br className="hidden sm:block" />
               with analysis that tells you
-              <br />
+              {" "}<br className="hidden sm:block" />
               <span className="text-accent">what to study next.</span>
             </h1>
             <p className="mt-5 max-w-xl text-base leading-relaxed text-nav-muted">
@@ -173,7 +173,7 @@ export default async function LandingPage() {
       </section>
 
       {/* Features */}
-      <section id="features" className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+      <section id="features" className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20">
         <p className="text-xs font-semibold uppercase tracking-wider text-primary">Features</p>
         <h2 className="mt-2 max-w-2xl text-3xl font-semibold tracking-tight">
           Built like the real exam, analysed like a coach would.
@@ -203,7 +203,7 @@ export default async function LandingPage() {
 
       {/* How it works */}
       <section id="how" className="border-y bg-background">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20">
           <p className="text-xs font-semibold uppercase tracking-wider text-primary">How it works</p>
           <h2 className="mt-2 text-3xl font-semibold tracking-tight">Three steps to your first analysis</h2>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
@@ -226,7 +226,7 @@ export default async function LandingPage() {
       </section>
 
       {/* Courses */}
-      <section id="courses" className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+      <section id="courses" className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20">
         <p className="text-xs font-semibold uppercase tracking-wider text-primary">Courses</p>
         <h2 className="mt-2 text-3xl font-semibold tracking-tight">Choose your course</h2>
         <p className="mt-2 max-w-2xl text-sm text-muted-foreground">

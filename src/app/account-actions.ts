@@ -67,7 +67,13 @@ export async function registerAction(_prev: FormState, form: FormData): Promise<
     return { fieldErrors, values };
   }
 
-  const res = await signUp(parsed.data);
+  let res: Awaited<ReturnType<typeof signUp>>;
+  try {
+    res = await signUp(parsed.data);
+  } catch (e) {
+    console.error("registerAction failed", e);
+    return { error: `Registration failed on the server: ${e instanceof Error ? e.message : String(e)}`, values };
+  }
   if (!res.ok) return { error: res.error, values };
   if (res.needsConfirmation) {
     return {
@@ -81,7 +87,13 @@ export async function loginAction(_prev: FormState, form: FormData): Promise<For
   const email = String(form.get("email") ?? "");
   const password = String(form.get("password") ?? "");
   if (!email || !password) return { error: "Enter your email and password.", values: { email } };
-  const res = await signIn(email, password);
+  let res: Awaited<ReturnType<typeof signIn>>;
+  try {
+    res = await signIn(email, password);
+  } catch (e) {
+    console.error("loginAction failed", e);
+    return { error: `Login failed on the server: ${e instanceof Error ? e.message : String(e)}`, values: { email } };
+  }
   if (!res.ok) return { error: res.error, values: { email } };
   redirect(safeNext(form.get("next")));
 }

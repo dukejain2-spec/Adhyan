@@ -127,7 +127,20 @@ async function localSessionUserId(): Promise<string | null> {
 
 // ───────────────────────── Public API ─────────────────────────
 
+/**
+ * The local JSON fallback writes to disk, which serverless hosts (Vercel)
+ * forbid. There, missing Supabase variables must surface as a clear error
+ * instead of crashing the page.
+ */
+const NOT_CONFIGURED: AuthResult = {
+  ok: false,
+  error:
+    "Sign-up is unavailable: the server is missing its Supabase settings (NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY).",
+};
+const localModeForbidden = () => !supabaseConfig() && Boolean(process.env.VERCEL);
+
 export async function signUp(input: SignUpInput): Promise<AuthResult> {
+  if (localModeForbidden()) return NOT_CONFIGURED;
   const email = input.email.trim().toLowerCase();
   const profileBase = {
     email,
@@ -173,6 +186,7 @@ export async function signUp(input: SignUpInput): Promise<AuthResult> {
 }
 
 export async function signIn(emailRaw: string, password: string): Promise<AuthResult> {
+  if (localModeForbidden()) return NOT_CONFIGURED;
   const email = emailRaw.trim().toLowerCase();
   if (supabaseConfig()) {
     const supabase = await supabaseAuthClient();

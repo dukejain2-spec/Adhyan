@@ -254,7 +254,7 @@ export function ExamPlayer({
       <div className="flex min-h-0 flex-1">
         {/* Question area */}
         <main className="flex min-w-0 flex-1 flex-col">
-          <div className="flex items-center justify-between border-b bg-surface px-4 py-3 sm:px-8">
+          <div className="flex items-center justify-between gap-3 border-b bg-surface px-4 py-3 sm:px-8">
             <p className="text-sm font-semibold">
               Question {index + 1}
               <span className="font-normal text-muted-foreground"> / {total}</span>
@@ -263,11 +263,11 @@ export function ExamPlayer({
               <span className="rounded-full bg-surface-muted px-2.5 py-1">
                 {FORMAT_LABEL[current.renderedType] ?? current.renderedType}
               </span>
-              <span>+1 mark</span>
+              <span className="hidden sm:inline">+1 mark</span>
             </div>
           </div>
 
-          <div className="no-select flex-1 overflow-y-auto px-4 py-6 sm:px-8" onContextMenu={(e) => e.preventDefault()}>
+          <div className="no-select flex-1 overflow-y-auto px-4 py-5 sm:px-8 sm:py-6" onContextMenu={(e) => e.preventDefault()}>
             <div className="mx-auto max-w-3xl">
               <QuestionBody
                 key={current.questionId}
@@ -278,14 +278,22 @@ export function ExamPlayer({
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2 border-t bg-surface px-4 py-3 sm:px-8">
-            <Button variant="outline" onClick={toggleReviewAndNext}>
-              {review.has(index) ? "Unmark review" : "Mark for review & next"}
+          <div className="grid grid-cols-2 gap-2 border-t bg-surface px-3 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:flex sm:items-center sm:px-8">
+            <Button variant="outline" onClick={toggleReviewAndNext} className="px-3">
+              <span className="sm:hidden">{review.has(index) ? "Unmark" : "Mark & next"}</span>
+              <span className="hidden sm:inline">
+                {review.has(index) ? "Unmark review" : "Mark for review & next"}
+              </span>
             </Button>
-            <Button variant="ghost" onClick={() => setAnswer(null)} disabled={!hasAnswer(answers[current.questionId])}>
-              Clear response
+            <Button
+              variant="ghost"
+              onClick={() => setAnswer(null)}
+              disabled={!hasAnswer(answers[current.questionId])}
+              className="px-3"
+            >
+              Clear<span className="hidden sm:inline">&nbsp;response</span>
             </Button>
-            <div className="ml-auto flex gap-2">
+            <div className="col-span-2 grid grid-cols-2 gap-2 sm:ml-auto sm:flex">
               <Button variant="outline" onClick={() => goTo(index - 1)} disabled={index === 0}>
                 <ChevronLeft className="h-4 w-4" /> Previous
               </Button>
@@ -310,7 +318,7 @@ export function ExamPlayer({
           <div className="absolute inset-y-0 right-0 w-80 max-w-[85vw] bg-surface" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between border-b px-4 py-3">
               <p className="text-sm font-semibold">Question palette</p>
-              <button onClick={() => setPaletteOpen(false)} aria-label="Close palette">
+              <button onClick={() => setPaletteOpen(false)} aria-label="Close palette" className="-m-2 rounded-lg p-2 hover:bg-surface-muted">
                 <X className="h-5 w-5" />
               </button>
             </div>
@@ -396,7 +404,7 @@ function QuestionBody({
           Is the following statement true or false?
         </p>
       )}
-      <p className="prompt-text text-[17px] leading-relaxed">{variant.prompt}</p>
+      <p className="prompt-text text-base leading-relaxed sm:text-[17px]">{variant.prompt}</p>
 
       {variant.media && (
         // eslint-disable-next-line @next/next/no-img-element

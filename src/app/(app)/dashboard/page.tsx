@@ -51,7 +51,7 @@ export default async function DashboardPage() {
       <div className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
         {/* Left column: welcome + tiles */}
         <div className="flex flex-col gap-6">
-          <Card className="flex items-center gap-6 p-6">
+          <Card className="flex items-center gap-4 p-5 sm:gap-6 sm:p-6">
             <div className="min-w-0 flex-1">
               <h1 className="text-xl font-semibold tracking-tight">Welcome back, {firstName}</h1>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
@@ -117,30 +117,30 @@ export default async function DashboardPage() {
             <h2 className="font-semibold">Best performance</h2>
           </div>
           {perf.best.length ? (
-            <table className="w-full text-sm">
+            <div className="overflow-x-auto"><table className="w-full text-sm">
               <thead className="border-y bg-surface-muted/60 text-left text-xs text-muted-foreground">
                 <tr>
-                  <th className="px-6 py-2.5 font-medium">Test</th>
+                  <th className="px-4 py-2.5 font-medium sm:px-6">Test</th>
                   <th className="px-3 py-2.5 text-right font-medium">Score</th>
-                  <th className="px-3 py-2.5 text-right font-medium">Accuracy</th>
+                  <th className="hidden px-3 py-2.5 text-right font-medium sm:table-cell">Accuracy</th>
                   <th className="px-6 py-2.5 font-medium">Proficiency</th>
                 </tr>
               </thead>
               <tbody className="divide-y">
                 {perf.best.map((b) => (
                   <tr key={b.attemptId}>
-                    <td className="px-6 py-3">
+                    <td className="px-4 py-3 sm:px-6">
                       <Link href={`/results/${b.attemptId}`} className="font-medium hover:text-primary">
                         {b.title}
                       </Link>
                     </td>
                     <td className="px-3 py-3 text-right tabular-nums">{b.score}%</td>
-                    <td className="px-3 py-3 text-right tabular-nums">{b.accuracy}%</td>
+                    <td className="hidden px-3 py-3 text-right tabular-nums sm:table-cell">{b.accuracy}%</td>
                     <td className="px-6 py-3"><ProficiencyBadge level={b.level} /></td>
                   </tr>
                 ))}
               </tbody>
-            </table>
+            </table></div>
           ) : (
             <p className="px-6 pb-6 text-sm text-muted-foreground">Your top results will be listed here.</p>
           )}

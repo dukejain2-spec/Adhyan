@@ -36,7 +36,7 @@ export function Brand({
         {showTagline && (
           <span
             className={cn(
-              "mt-1 text-[10px] font-medium uppercase tracking-[0.14em]",
+              "mt-1 hidden text-[10px] font-medium uppercase tracking-[0.14em] sm:block",
               tone === "light" ? "text-nav-muted" : "text-muted-foreground",
             )}
           >

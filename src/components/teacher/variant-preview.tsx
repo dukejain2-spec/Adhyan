@@ -38,8 +38,8 @@ export function VariantPreview({
   };
 
   return (
-    <div className="rounded-xl border bg-surface p-5">
-      <div className="flex items-start justify-between gap-4">
+    <div className="rounded-xl border bg-surface p-4 sm:p-5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
         <div className="min-w-0">
           {number !== undefined && (
             <p className="text-xs font-medium text-muted-foreground">Question {number}</p>
@@ -60,7 +60,7 @@ export function VariantPreview({
             </p>
           )}
         </div>
-        <Button size="sm" variant="outline" onClick={generate} disabled={pending} className="shrink-0">
+        <Button size="sm" variant="outline" onClick={generate} disabled={pending} className="shrink-0 self-start">
           {variants ? <RefreshCw className="h-4 w-4" /> : <Shuffle className="h-4 w-4" />}
           {pending ? "Generating…" : variants ? "Regenerate" : "Preview variants"}
         </Button>
