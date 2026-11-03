@@ -1,4 +1,5 @@
 import "server-only";
+import { supabaseOrigin } from "@/lib/supabase/origin";
 
 /**
  * Backend selection.
@@ -11,7 +12,7 @@ import "server-only";
 const PLACEHOLDER = /your-project|your-anon-key|your-service-role-key/;
 
 export function supabaseConfig() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
+  const url = supabaseOrigin(process.env.NEXT_PUBLIC_SUPABASE_URL);
   const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "";
   const service = process.env.SUPABASE_SERVICE_ROLE_KEY ?? "";
   const ok = Boolean(url && anon && service) && !PLACEHOLDER.test(url + anon + service);

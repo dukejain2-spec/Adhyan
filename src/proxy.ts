@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
+import { supabaseOrigin } from "@/lib/supabase/origin";
 
 /**
  * Proxy (Next.js 16 — formerly "middleware"). Refreshes the Supabase auth
@@ -9,7 +10,7 @@ import { createServerClient } from "@supabase/ssr";
  * one bad setting cannot take the whole site down.
  */
 export async function proxy(request: NextRequest) {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const url = supabaseOrigin(process.env.NEXT_PUBLIC_SUPABASE_URL);
   const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!url || !anon) return NextResponse.next();
 
